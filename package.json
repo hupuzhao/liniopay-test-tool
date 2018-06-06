@@ -1,0 +1,22 @@
+{
+  "name": "linioapi",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.6.1",
+    "axios": "^0.18.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-json-view": "^1.17.0",
+    "react-scripts": "0.9.x"
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.7.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
