@@ -5,6 +5,7 @@ import ReactJson from 'react-json-view';
 import './App.css';
 
 const PHPClient = 'http://127.0.0.1/linioapi/client.php';
+const PageTitle = 'LinioAPI Test Tool';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -20,6 +21,7 @@ class Index extends Component {
 
     componentDidMount() {
         // To disabled submit button at the beginning.
+        document.title = PageTitle;
         this.props.form.validateFields();
     }
     handleSubmit = (e) => {
@@ -30,11 +32,17 @@ class Index extends Component {
                     loading: true
                 });
                 axios.post(PHPClient, values).then(function (response) {
-                    this.setState({
-                        loading: false,
-                        result: response.data
-                    })
-
+                    if(response.data.toString() === "[object Object]") {
+                        this.setState({
+                            loading: false,
+                            result: response.data,
+                        })
+                    } else {
+                        this.setState({
+                            loading: false,
+                            result: {response: response.data.toString()},
+                        })
+                    }
                 }.bind(this)).catch(function (error) {
                     this.setState({
                         loading: false
@@ -55,6 +63,7 @@ class Index extends Component {
           <Row>
               <Col span={12} offset={6}>
                   <Card style={{textAlign: 'center', marginTop: '16px'}}>
+                      <h1 style={{textAlign: 'center'}}>{PageTitle}</h1>
                       <Form onSubmit={this.handleSubmit}>
                           <FormItem
                               validateStatus={accessKeyError ? 'error' : ''}
